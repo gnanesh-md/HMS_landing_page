@@ -65,24 +65,12 @@ const appts = [
 
 export function HospAILogo({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="flex flex-col items-center">
-      <svg viewBox="0 0 120 72" className={compact ? 'h-9' : 'h-[58px]'} aria-hidden="true">
-        {/* circuit nodes */}
-        {[[14, 16], [14, 40], [106, 16], [106, 40], [30, 6], [90, 6]].map(([x, y], i) => (
-          <g key={i}>
-            <line x1={x} y1={y} x2={x < 60 ? 40 : 80} y2={Math.min(Math.max(y, 22), 44)} stroke="#ff8a9b" strokeWidth="2" />
-            <circle cx={x} cy={y} r="4" fill="#2a2d34" stroke="#ff8a9b" strokeWidth="2" />
-          </g>
-        ))}
-        {/* building */}
-        <rect x="38" y="22" width="44" height="46" rx="3" fill="#e2e8f0" />
-        <rect x="46" y="10" width="28" height="18" rx="2" fill="#f8fafc" />
-        {[0, 1, 2].map((r) => [0, 1, 2, 3].map((c) => <rect key={`${r}${c}`} x={43 + c * 9} y={36 + r * 9} width="5" height="5" rx="1" fill="#ff677d" />))}
-        <rect x="55" y="58" width="10" height="10" fill="#392f5a" />
-        {/* cross */}
-        <rect x="54" y="4" width="12" height="28" rx="2.5" fill="#ef4444" stroke="white" strokeWidth="2" />
-        <rect x="46" y="12" width="28" height="12" rx="2.5" fill="#ef4444" stroke="white" strokeWidth="2" />
-      </svg>
+    <div className="flex flex-col items-center select-none">
+      <img
+        src="/logo.png"
+        alt="HospAI Logo"
+        className={compact ? 'h-10 w-10 object-contain drop-shadow-md' : 'h-16 w-16 object-contain drop-shadow-lg'}
+      />
       <div className={`font-display font-extrabold tracking-tight leading-none ${compact ? 'text-[18px]' : 'text-[30px] mt-1'}`}>
         <span className="text-white">Hosp</span>
         <span className="text-brand-400">AI</span>
