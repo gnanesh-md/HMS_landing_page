@@ -19,7 +19,7 @@ const navLinks = [
 export function LogoMark({ size = 56 }: { size?: number }) {
   return (
     <img
-      src="/logo.png"
+      src="/hosp ai logo without bg.png"
       alt="HospAI"
       width={size}
       height={size}
@@ -33,11 +33,9 @@ export function Logo({ dark = false, className = '' }: { dark?: boolean; classNa
   return (
     <span className={`inline-flex items-center ${className}`}>
       <img
-        src="/logo.png"
+        src="/hosp ai logo without bg.png"
         alt="HospAI"
-        className={`h-14 sm:h-16 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
-          dark ? 'brightness-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]' : 'drop-shadow-sm'
-        }`}
+        className="h-14 sm:h-16 w-auto object-contain select-none transition-transform hover:scale-[1.02]"
       />
     </span>
   );
