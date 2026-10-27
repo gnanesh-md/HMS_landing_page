@@ -67,15 +67,10 @@ export function HospAILogo({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex flex-col items-center select-none">
       <img
-        src="public/HospAI Medical Technology Logo.png"
+        src="/logo.png"
         alt="HospAI Logo"
-        className={compact ? 'h-10 w-10 object-contain drop-shadow-md' : 'h-16 w-16 object-contain drop-shadow-lg'}
+        className={compact ? 'h-11 w-auto object-contain drop-shadow-md' : 'h-20 w-auto object-contain drop-shadow-xl'}
       />
-      <div className={`font-display font-extrabold tracking-tight leading-none ${compact ? 'text-[18px]' : 'text-[30px] mt-1'}`}>
-        <span className="text-white">Hosp</span>
-        <span className="text-brand-400">AI</span>
-      </div>
-      {!compact && <div className="mt-1 text-[8.5px] text-slate-400 tracking-wide">— AI Driven Healthcare Optimization —</div>}
     </div>
   );
 }

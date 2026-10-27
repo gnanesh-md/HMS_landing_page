@@ -15,8 +15,8 @@ const navLinks = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-/** HospAI mark: official 3D hospital AI badge. */
-export function LogoMark({ size = 40 }: { size?: number }) {
+/** HospAI official transparent brand logo. */
+export function LogoMark({ size = 44 }: { size?: number }) {
   return (
     <img
       src="/logo.png"
@@ -29,16 +29,16 @@ export function LogoMark({ size = 40 }: { size?: number }) {
   );
 }
 
-export function Logo({ dark = false }: { dark?: boolean }) {
+export function Logo({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
   return (
-    <span className="flex items-center gap-2.5">
-      <span className="flex items-center justify-center shrink-0 drop-shadow-md"><LogoMark size={42} /></span>
-      <span className="leading-none">
-        <span className={`block font-display text-[20px] font-extrabold tracking-tight ${dark ? 'text-white' : 'text-slate-900'}`}>
-          Hosp<span className="text-brand-500">AI</span>
-        </span>
-        <span className={`block text-[9px] font-semibold tracking-[0.14em] uppercase mt-1 ${dark ? 'text-slate-400' : 'text-slate-500'}`}>AI-Driven Healthcare</span>
-      </span>
+    <span className={`inline-flex items-center ${className}`}>
+      <img
+        src="/logo.png"
+        alt="HospAI"
+        className={`h-10 sm:h-11 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
+          dark ? 'brightness-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]' : 'drop-shadow-sm'
+        }`}
+      />
     </span>
   );
 }
