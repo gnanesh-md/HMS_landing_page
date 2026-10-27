@@ -15,42 +15,30 @@ const navLinks = [
   { label: 'FAQ', href: '#faq' },
 ];
 
-/** HospAI mark: hospital building with a medical cross and AI circuit nodes. */
-export function LogoMark({ size = 40 }: { size?: number }) {
+/** HospAI official transparent brand logo. */
+export function LogoMark({ size = 42 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
-      <defs>
-        <linearGradient id="hospaiBg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#ff677d" />
-          <stop offset="100%" stopColor="#392f5a" />
-        </linearGradient>
-      </defs>
-      <rect width="48" height="48" rx="12" fill="url(#hospaiBg)" />
-      {/* circuit nodes */}
-      <path d="M8 16h5l3 3M40 16h-5l-3 3M8 30h6M40 30h-6" stroke="#ffd1d5" strokeWidth="1.6" fill="none" strokeLinecap="round" />
-      {[[8, 16], [40, 16], [8, 30], [40, 30]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r="2" fill="#ffd1d5" />)}
-      {/* building */}
-      <rect x="15" y="19" width="18" height="21" rx="1.5" fill="white" />
-      <rect x="19" y="35" width="4" height="5" fill="#392f5a" />
-      <rect x="25" y="35" width="4" height="5" fill="#392f5a" />
-      {[0, 1].map((r) => [0, 1, 2].map((c) => <rect key={`${r}${c}`} x={17.5 + c * 5} y={27 + r * 4} width="3" height="2.4" rx="0.5" fill="#ff8a9b" />))}
-      {/* medical cross */}
-      <rect x="21.5" y="7" width="5" height="14" rx="1.2" fill="#ff677d" stroke="white" strokeWidth="1.4" />
-      <rect x="17" y="11.5" width="14" height="5" rx="1.2" fill="#ff677d" stroke="white" strokeWidth="1.4" />
-    </svg>
+    <img
+      src="/hosp ai logo without bg.png"
+      alt="HospAI"
+      width={size}
+      height={size}
+      className="object-contain shrink-0 select-none"
+      style={{ width: size, height: size }}
+    />
   );
 }
 
-export function Logo({ dark = false }: { dark?: boolean }) {
+export function Logo({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
   return (
-    <span className="flex items-center gap-2.5">
-      <span className="rounded-xl shadow-md shadow-brand-600/25"><LogoMark size={40} /></span>
-      <span className="leading-none">
-        <span className={`block font-display text-[20px] font-extrabold tracking-tight ${dark ? 'text-white' : 'text-slate-900'}`}>
-          Hosp<span className="text-brand-500">AI</span>
-        </span>
-        <span className={`block text-[9px] font-semibold tracking-[0.14em] uppercase mt-1 ${dark ? 'text-slate-400' : 'text-slate-500'}`}>AI-Driven Healthcare</span>
-      </span>
+    <span className={`inline-flex items-center ${className}`}>
+      <img
+        src="/hosp ai logo without bg.png"
+        alt="HospAI"
+        className={`h-12 sm:h-14 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
+          dark ? 'brightness-125' : ''
+        }`}
+      />
     </span>
   );
 }
