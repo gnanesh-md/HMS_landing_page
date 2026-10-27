@@ -278,15 +278,15 @@ export default function BookDemo() {
                   {[
                     {
                       opt: 'Standard version',
-                      badge: 'Fixed Core Operations',
+                      badge: 'Core Hospital Suite',
                       badgeStyle: 'bg-slate-800 text-slate-100 border border-slate-700',
-                      tagline: 'Standardized clinical & diagnostic foundation for hospitals up to 250 beds',
+                      tagline: 'Complete OPD, IPD, lab, pharmacy, and billing system — ready for immediate use.',
                       borderActive: 'border-brand-600 ring-2 ring-brand-600/20 bg-brand-50/15 shadow-lg shadow-brand-900/5',
                       borderIdle: 'border-slate-200 hover:border-brand-300 bg-white hover:shadow-sm',
                       checkActive: 'border-brand-600 bg-brand-600 text-white',
                       iconBg: 'bg-brand-50 text-brand-700',
                       pillBg: 'bg-slate-100 text-slate-700 border-slate-200',
-                      summary: 'Fixed Enterprise Core · Turnkey in 2 Weeks',
+                      summary: '⚡ Ready to Launch in 14 Days · Core Modules Included',
                       features: [
                         { t: 'Inpatient (IPD) Admissions, Bed Allocation & Transfers' },
                         { t: 'Emergency Room (ER) & Rapid Triage (ESI 1–5)' },
@@ -301,15 +301,15 @@ export default function BookDemo() {
                     },
                     {
                       opt: 'Enterprise version',
-                      badge: 'Full Intelligent Ecosystem',
+                      badge: 'Full Suite + AI Intelligence',
                       badgeStyle: 'bg-gradient-to-r from-violet-600 to-brand-600 text-white shadow-sm',
-                      tagline: 'Complete hospital operating platform with Keppler AI, Patient 360° & multi-campus scale',
+                      tagline: 'Everything in Standard, plus Keppler AI, Patient 360°, ICU, OT, and insurance workflows.',
                       borderActive: 'border-violet-600 ring-2 ring-violet-600/20 bg-violet-50/15 shadow-xl shadow-violet-900/5',
                       borderIdle: 'border-slate-200 hover:border-violet-300 bg-white hover:shadow-sm',
                       checkActive: 'border-violet-600 bg-violet-600 text-white',
                       iconBg: 'bg-violet-50 text-violet-700',
                       pillBg: 'bg-violet-50 text-violet-700 border-violet-200 font-semibold',
-                      summary: '25+ Modules · Unlimited Scale & Dedicated AI',
+                      summary: '🚀 All 25+ Hospital Modules · Keppler AI & Patient 360° Included',
                       features: [
                         { t: 'Everything included in Standard version', highlight: true },
                         { t: 'Patient 360° Post-Discharge Journeys & WhatsApp Surveys', highlight: true },
