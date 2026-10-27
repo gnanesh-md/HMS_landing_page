@@ -16,28 +16,36 @@ const navLinks = [
 ];
 
 /** HospAI official transparent brand logo. */
-export function LogoMark({ size = 42 }: { size?: number }) {
+export function LogoMark({ size = 48, className = '' }: { size?: number; className?: string }) {
   return (
     <img
       src="/hosp ai logo without bg.png"
       alt="HospAI"
       width={size}
       height={size}
-      className="object-contain shrink-0 select-none"
+      className={`object-contain shrink-0 select-none ${className}`}
       style={{ width: size, height: size }}
     />
   );
 }
 
-export function Logo({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
+export function Logo({
+  dark = false,
+  className = '',
+  imgClassName = '',
+}: {
+  dark?: boolean;
+  className?: string;
+  imgClassName?: string;
+}) {
   return (
     <span className={`inline-flex items-center ${className}`}>
       <img
         src="/hosp ai logo without bg.png"
         alt="HospAI"
-        className={`h-12 sm:h-14 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
-          dark ? 'brightness-125' : ''
-        }`}
+        className={`h-14 sm:h-18 md:h-20 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
+          dark ? 'brightness-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.08)]' : ''
+        } ${imgClassName}`}
       />
     </span>
   );
@@ -115,7 +123,7 @@ export default function Navbar() {
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
               <Logo />
             </Link>
@@ -231,7 +239,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[60] lg:hidden">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setMenuOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[86%] max-w-sm bg-white shadow-2xl flex flex-col animate-slide-in-right">
-            <div className="flex items-center justify-between px-5 h-16 border-b border-slate-100">
+            <div className="flex items-center justify-between px-5 h-20 border-b border-slate-100">
               <Logo />
               <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2 text-slate-600" aria-label="Close menu"><XIcon size={22} /></button>
             </div>

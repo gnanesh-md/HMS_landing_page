@@ -19,12 +19,12 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
+        '@': path.resolve(import.meta.dirname, './src'),
       },
     },
     server: {
       host: process.env.VITE_DEV_SERVER_HOST || '0.0.0.0',
-      port: parseInt(process.env.PORT || '7443'),
+      port: parseInt(process.env.PORT || '4000'),
       strictPort: true,
       // Allow Cloudflare quick-tunnel URLs for sharing demos.
       allowedHosts: ['.trycloudflare.com'],
