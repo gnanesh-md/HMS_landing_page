@@ -16,7 +16,7 @@ const navLinks = [
 ];
 
 /** HospAI official transparent brand logo. */
-export function LogoMark({ size = 44 }: { size?: number }) {
+export function LogoMark({ size = 56 }: { size?: number }) {
   return (
     <img
       src="/logo.png"
@@ -35,7 +35,7 @@ export function Logo({ dark = false, className = '' }: { dark?: boolean; classNa
       <img
         src="/logo.png"
         alt="HospAI"
-        className={`h-10 sm:h-11 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
+        className={`h-14 sm:h-16 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
           dark ? 'brightness-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.15)]' : 'drop-shadow-sm'
         }`}
       />
@@ -115,7 +115,7 @@ export default function Navbar() {
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 flex items-center justify-between">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
               <Logo />
             </Link>
