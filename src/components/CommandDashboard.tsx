@@ -67,7 +67,7 @@ export function HospAILogo({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex flex-col items-center select-none">
       <img
-        src="/logo.png"
+        src="public/HospAI Medical Technology Logo.png"
         alt="HospAI Logo"
         className={compact ? 'h-10 w-10 object-contain drop-shadow-md' : 'h-16 w-16 object-contain drop-shadow-lg'}
       />
