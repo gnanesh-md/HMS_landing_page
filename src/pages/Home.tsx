@@ -17,6 +17,7 @@ import DepartmentsSection from '../components/DepartmentsSection';
 import RevenueSection from '../components/RevenueSection';
 import PharmacySection from '../components/PharmacySection';
 import FAQ from '../components/FAQ';
+import Patient360Section from '../components/Patient360Section';
 import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
 import ScrollExtras from '../components/ScrollExtras';
@@ -42,6 +43,7 @@ export default function Home() {
         />
         <SectionRise><DoctorPortalSection /></SectionRise>
         <ScrollExpand><IntelligenceSection /></ScrollExpand>
+        <SectionRise><Patient360Section /></SectionRise>
         <SectionRise><DepartmentsSection /></SectionRise>
         <SectionRise><PharmacySection /></SectionRise>
         <SectionRise><MobileSection /></SectionRise>

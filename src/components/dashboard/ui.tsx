@@ -3,7 +3,8 @@ import { ChevronRightIcon } from '../icons';
 
 export type ViewId =
   | 'dashboard' | 'patients' | 'appointments' | 'er' | 'clinical' | 'ip' | 'icu' | 'nursing'
-  | 'lab' | 'radiology' | 'pharmacy' | 'ot' | 'billing' | 'insurance' | 'reports' | 'analytics' | 'admin' | 'ai';
+  | 'lab' | 'radiology' | 'pharmacy' | 'ot' | 'billing' | 'insurance' | 'reports' | 'analytics' | 'admin' | 'ai'
+  | 'patient360';
 
 export type ChartPatient = {
   name: string;

@@ -1,6 +1,6 @@
 import {
-  ActivityIcon, BedIcon, BodyIcon, BriefcaseIcon, BrainIcon, CalendarIcon, CardIcon, ClipboardIcon, ClockIcon, EyeIcon, FileTextIcon,
-  FlaskIcon, GridIcon, HeartPulseIcon, MicIcon, PillIcon, ScalpelIcon, ScanIcon, SearchIcon, SettingsIcon, ShieldIcon,
+  ActivityIcon, AlertIcon, BedIcon, BodyIcon, BriefcaseIcon, BrainIcon, CalendarIcon, CardIcon, ClipboardIcon, ClockIcon, EyeIcon, FileTextIcon,
+  FlaskIcon, GridIcon, HeartPulseIcon, MessageIcon, MicIcon, PillIcon, ScalpelIcon, ScanIcon, SearchIcon, SettingsIcon, ShieldIcon,
   SparkIcon, SplitIcon, StarIcon, StethoscopeIcon, TargetIcon, TrendIcon, UserIcon, type IconType,
 } from './icons';
 
@@ -55,6 +55,20 @@ export const moduleGroups: ModuleGroup[] = [
       { key: 'hrms', label: 'HRMS & Staffing', icon: BriefcaseIcon, desc: 'Staff directory, shift rosters, doctor scheduling, leave, attendance and credentialing.', features: ['Rosters', 'Attendance', 'Credentialing'] },
       { key: 'reports', label: 'Reports & Analytics', icon: TrendIcon, desc: 'OP, IP, ER, pharmacy, diagnostic and financial reports from one reports hub.', features: ['OP / IP / ER', 'TAT metrics', 'Revenue split'] },
       { key: 'admin', label: 'Admin & Access Control', icon: SettingsIcon, desc: 'Role-based access across 60+ modules with an append-only audit trail.', features: ['8 roles', 'Audit trail', 'Permissions'] },
+    ],
+  },
+  {
+    key: 'patient360',
+    title: 'Patient 360°',
+    blurb: 'Unified post-discharge engagement: care journeys, WhatsApp surveys, AI-powered recovery tracking and smart escalations.',
+    icon: SparkIcon,
+    items: [
+      { key: 'p360profile', label: 'Patient 360° Profile', icon: UserIcon, desc: 'Consolidated view of demographics, encounters, discharge summaries, medications, lab results and appointments in one workspace.', features: ['Unified timeline', 'Discharge summary', 'Lab & Rx history'] },
+      { key: 'p360ai', label: 'AI Query & Segmentation', icon: BrainIcon, desc: 'Use Keppler AI (Qwen) to search the patient population through natural language and create cohorts from Excel/PDF data.', features: ['Natural language', 'Cohort builder', 'Excel/PDF import'] },
+      { key: 'p360wa', label: 'WhatsApp Surveys', icon: MessageIcon, desc: 'Send approved patient check-ins, collect recovery feedback, track responses and maintain a full communication history.', features: ['Automated sends', 'Response tracking', 'Full history'] },
+      { key: 'p360journey', label: 'Post-Discharge Journeys', icon: ClipboardIcon, desc: 'Configure follow-up schedules, daily surveys, appointment reminders and care-team tasks on clinical pathways.', features: ['Care pathways', 'Daily surveys', 'Auto-reminders'] },
+      { key: 'p360tasks', label: 'Tasks & Escalations', icon: AlertIcon, desc: 'Route concerning responses, unanswered messages and missed appointments to the right staff automatically.', features: ['Smart routing', 'SLA tracking', 'Reassignment'] },
+      { key: 'p360analytics', label: '360° Analytics', icon: TrendIcon, desc: 'Monitor response rates, outreach delivery, appointment confirmation, task completion and journey performance.', features: ['Response trends', 'Journey KPIs', 'Staff reports'] },
     ],
   },
   {

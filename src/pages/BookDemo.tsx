@@ -20,7 +20,7 @@ type FormState = {
 
 type FormErrors = Partial<Record<keyof FormState, string>>;
 
-const versionOptions = ['Basic version', 'Standard version', 'Enterprise version'];
+const versionOptions = ['Standard version', 'Enterprise version'];
 
 const bedOptions = ['Under 50', '50–100', '101–250', '251–500', '500+'];
 
@@ -52,7 +52,7 @@ export default function BookDemo() {
       const match = versionOptions.find((opt) => opt.toLowerCase().includes(param.toLowerCase()));
       if (match) return match;
     }
-    return 'Standard version';
+    return 'Enterprise version';
   })();
 
   const [form, setForm] = useState<FormState>({
@@ -271,42 +271,58 @@ export default function BookDemo() {
               </div>
             </Section>
 
-            <Section n={3} title="What should we focus on?" hint="Choose the version you would like to explore">
+            <Section n={3} title="What should we focus on?" hint="Choose the edition suited for your hospital scale">
               <div className="sm:col-span-2 space-y-4">
-                {/* Basic — simple chip */}
-                <div className="flex items-center gap-2">
-                  <Chip
-                    on={form.version === 'Basic version' || form.interests.includes('Basic version')}
-                    onClick={() => selectVersion('Basic version')}
-                    check
-                  >
-                    Basic version
-                  </Chip>
-                  <span className="text-[13px] text-slate-400">Core modules for smaller facilities</span>
-                </div>
-
-                {/* Standard & Enterprise — rich cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Standard & Enterprise — upgraded rich tier cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
                     {
                       opt: 'Standard version',
-                      badge: 'Most popular',
-                      badgeColor: 'bg-brand-600 text-white',
-                      borderActive: 'border-brand-500 ring-2 ring-brand-500/20',
-                      borderIdle: 'border-slate-200 hover:border-brand-300',
-                      iconBg: 'bg-brand-50 text-brand-600',
-                      features: ['All Clinical & Nursing modules', 'Laboratory & Radiology', 'Billing & Payments', 'Patient 360 timeline', 'Standard reports hub'],
+                      badge: 'Fixed Core Operations',
+                      badgeStyle: 'bg-slate-800 text-slate-100 border border-slate-700',
+                      tagline: 'Standardized clinical & diagnostic foundation for hospitals up to 250 beds',
+                      borderActive: 'border-brand-600 ring-2 ring-brand-600/20 bg-brand-50/15 shadow-lg shadow-brand-900/5',
+                      borderIdle: 'border-slate-200 hover:border-brand-300 bg-white hover:shadow-sm',
+                      checkActive: 'border-brand-600 bg-brand-600 text-white',
+                      iconBg: 'bg-brand-50 text-brand-700',
+                      pillBg: 'bg-slate-100 text-slate-700 border-slate-200',
+                      summary: 'Fixed Enterprise Core · Turnkey in 2 Weeks',
+                      features: [
+                        { t: 'Inpatient (IPD) Admissions, Bed Allocation & Transfers' },
+                        { t: 'Emergency Room (ER) & Rapid Triage (ESI 1–5)' },
+                        { t: 'Outpatient (OPD) Scheduling & Live Token Queues' },
+                        { t: 'Doctor Consultation Workspace & Bedside MAR Nursing' },
+                        { t: 'Laboratory (LIS) & Radiology (RIS/PACS) Workflows' },
+                        { t: 'Pharmacy Inventory, Formulary & Dispensary Tracking' },
+                        { t: 'Multi-mode Hospital Billing, Cashier & Standard TPA' },
+                        { t: 'Unified Longitudinal EMR & Patient Master (UHID/MRN)' },
+                        { t: 'Departmental TAT, Census & Operational Reports' },
+                      ],
                     },
                     {
                       opt: 'Enterprise version',
-                      badge: 'Full suite',
-                      badgeColor: 'bg-ink-900 text-white',
-                      borderActive: 'border-ink-700 ring-2 ring-ink-900/15',
-                      borderIdle: 'border-slate-200 hover:border-slate-400',
-                      iconBg: 'bg-slate-100 text-slate-700',
-                      features: ['Everything in Standard', 'HospAI suite (Voice, OCR, Symptom AI)', 'Insurance & TPA workflow', 'HRMS & credentialing', 'Advanced analytics & NLQ'],
+                      badge: 'Full Intelligent Ecosystem',
+                      badgeStyle: 'bg-gradient-to-r from-violet-600 to-brand-600 text-white shadow-sm',
+                      tagline: 'Complete hospital operating platform with Keppler AI, Patient 360° & multi-campus scale',
+                      borderActive: 'border-violet-600 ring-2 ring-violet-600/20 bg-violet-50/15 shadow-xl shadow-violet-900/5',
+                      borderIdle: 'border-slate-200 hover:border-violet-300 bg-white hover:shadow-sm',
+                      checkActive: 'border-violet-600 bg-violet-600 text-white',
+                      iconBg: 'bg-violet-50 text-violet-700',
+                      pillBg: 'bg-violet-50 text-violet-700 border-violet-200 font-semibold',
+                      summary: '25+ Modules · Unlimited Scale & Dedicated AI',
+                      features: [
+                        { t: 'Everything included in Standard version', highlight: true },
+                        { t: 'Patient 360° Post-Discharge Journeys & WhatsApp Surveys', highlight: true },
+                        { t: 'Keppler AI Suite: Voice SOAP (5 langs), OCR & Symptom AI', highlight: true },
+                        { t: 'Critical Care (7-Tab ICU Flowsheet) & Surgery OT Management' },
+                        { t: 'End-to-End TPA Insurance: Pre-auth, Claims & Denial Analytics' },
+                        { t: 'Executive BI Dashboards, Cohort Segmentation & Natural Language Query' },
+                        { t: 'HRMS Staff Rostering, Clinical Credentialing & Audit Trail' },
+                        { t: 'Multi-Facility Network Console, HL7 FHIR R4 & DICOM Integrations' },
+                        { t: 'Custom Clinical Form Builder, 24/7 Dedicated SLA & Hybrid/Cloud' },
+                      ],
                     },
-                  ].map(({ opt, badge, badgeColor, borderActive, borderIdle, iconBg, features }) => {
+                  ].map(({ opt, badge, badgeStyle, tagline, borderActive, borderIdle, checkActive, iconBg, pillBg, summary, features }) => {
                     const on = form.version === opt || form.interests.includes(opt);
                     return (
                       <button
@@ -314,30 +330,42 @@ export default function BookDemo() {
                         type="button"
                         aria-pressed={on}
                         onClick={() => selectVersion(opt)}
-                        className={`relative text-left rounded-2xl border p-4 transition-all duration-200 ${on ? borderActive + ' bg-white shadow-md' : borderIdle + ' bg-white'}`}
+                        className={`relative text-left rounded-2xl border p-5 flex flex-col justify-between transition-all duration-200 ${on ? borderActive + ' shadow-md' : borderIdle}`}
                       >
-                        {/* Badge */}
-                        <span className={`absolute -top-2.5 left-4 inline-flex items-center h-5 px-2 rounded-full text-[10.5px] font-bold tracking-wide ${badgeColor}`}>
-                          {badge}
-                        </span>
-
-                        <div className="flex items-center justify-between mt-1">
-                          <span className="font-display text-[15px] font-bold text-slate-900">{opt}</span>
-                          <span className={`h-5 w-5 rounded-full border-2 flex items-center justify-center transition-all ${on ? 'border-brand-600 bg-brand-600' : 'border-slate-300'}`}>
-                            {on && <CheckIcon size={10} strokeWidth={3} />}
+                        {/* Top Badge */}
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <span className={`inline-flex items-center h-5 px-2.5 rounded-full text-[10.5px] font-bold tracking-wide uppercase ${badgeStyle}`}>
+                            {badge}
+                          </span>
+                          <span className={`h-5 w-5 rounded-full border-2 flex items-center justify-center transition-all ${on ? checkActive : 'border-slate-300 bg-white'}`}>
+                            {on && <CheckIcon size={11} strokeWidth={3} />}
                           </span>
                         </div>
 
-                        <ul className="mt-3 space-y-1.5">
+                        {/* Title & Tagline */}
+                        <div>
+                          <div className="font-display text-[17px] font-bold text-slate-900 leading-tight">{opt}</div>
+                          <p className="text-[12.5px] text-slate-500 mt-1 leading-snug">{tagline}</p>
+                        </div>
+
+                        {/* Feature list */}
+                        <ul className="mt-4 pt-3 border-t border-slate-100 space-y-2 flex-1">
                           {features.map((f) => (
-                            <li key={f} className="flex items-center gap-2 text-[12.5px] text-slate-600">
-                              <span className={`h-4 w-4 rounded flex items-center justify-center shrink-0 ${iconBg}`}>
+                            <li key={f.t} className={`flex items-start gap-2 text-[12.5px] leading-tight ${f.highlight ? 'font-semibold text-slate-900' : 'text-slate-600'}`}>
+                              <span className={`h-4 w-4 rounded-md flex items-center justify-center shrink-0 mt-0.5 ${iconBg}`}>
                                 <CheckIcon size={9} strokeWidth={3} />
                               </span>
-                              {f}
+                              <span>{f.t}</span>
                             </li>
                           ))}
                         </ul>
+
+                        {/* Bottom Tag */}
+                        <div className="mt-4 pt-3 border-t border-slate-100">
+                          <span className={`inline-block text-[11px] px-2.5 py-1 rounded-md border tracking-wide ${pillBg}`}>
+                            {summary}
+                          </span>
+                        </div>
                       </button>
                     );
                   })}

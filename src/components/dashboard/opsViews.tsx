@@ -4,7 +4,7 @@ import {
   useDash, type Stat, type Tone, type ViewId,
 } from './ui';
 import { SurgicalChecklist } from './careViews';
-import { AlertIcon, CheckIcon, DownloadIcon, FilterIcon, PlusIcon, RefreshIcon } from '../icons';
+import { AlertIcon, CheckIcon, DownloadIcon, FilterIcon, PlusIcon, RefreshIcon, SearchIcon, SparkIcon } from '../icons';
 
 /* ───────────────────────── Surgery / OT schedule ───────────────────────── */
 
@@ -475,6 +475,298 @@ export function GenericView({ id }: { id: ViewId }) {
             </tr>
           ))}
         </Table>
+      </Body>
+    </>
+  );
+}
+
+
+/* ─────────────────────────── Patient 360° View ───────────────────────────── */
+
+const p360Patients = [
+  { name: 'James R. Okafor', mrn: 'MRN-100482', age: 64, sex: 'M', condition: 'Post-CABG', discharged: '2d ago', journey: 'Cardiac Recovery', responses: 4, pending: 1, sentiment: 'good', whatsapp: 'Responded', nextAppt: 'Nov 3' },
+  { name: 'Priya S. Nair', mrn: 'MRN-100319', age: 42, sex: 'F', condition: 'T2 Diabetes Mgmt.', discharged: '5d ago', journey: 'Diabetes Follow-up', responses: 2, pending: 0, sentiment: 'good', whatsapp: 'Responded', nextAppt: 'Nov 8' },
+  { name: 'Carlos A. Mendez', mrn: 'MRN-100547', age: 71, sex: 'M', condition: 'Hypertension / CKD', discharged: '1d ago', journey: 'Hypertension Watch', responses: 0, pending: 2, sentiment: 'alert', whatsapp: 'No Reply', nextAppt: 'Nov 1' },
+  { name: 'Fatima Al-Hassan', mrn: 'MRN-100611', age: 29, sex: 'F', condition: 'Post-CS Delivery', discharged: '3d ago', journey: 'Maternal Recovery', responses: 5, pending: 0, sentiment: 'good', whatsapp: 'Responded', nextAppt: 'Nov 6' },
+  { name: 'David K. Mensah', mrn: 'MRN-100388', age: 58, sex: 'M', condition: 'Hip Arthroplasty', discharged: '7d ago', journey: 'Ortho Rehabilitation', responses: 3, pending: 1, sentiment: 'warn', whatsapp: 'Delayed', nextAppt: 'Nov 10' },
+  { name: 'Mei-Ling Zhao', mrn: 'MRN-100712', age: 51, sex: 'F', condition: 'Breast Cancer – Chemo', discharged: '10d ago', journey: 'Oncology Support', responses: 6, pending: 0, sentiment: 'good', whatsapp: 'Responded', nextAppt: 'Nov 4' },
+];
+
+const sentimentMap: Record<string, { dot: string; label: string; pill: 'green' | 'amber' | 'red' }> = {
+  good:  { dot: 'bg-emerald-500', label: 'Stable',    pill: 'green' },
+  warn:  { dot: 'bg-amber-400',   label: 'Review',    pill: 'amber' },
+  alert: { dot: 'bg-rose-500',    label: 'Escalate',  pill: 'red'   },
+};
+
+const taskQueue = [
+  { patient: 'Carlos A. Mendez', task: 'No survey response in 24h', due: 'Overdue', tone: 'red' as const, assignee: 'Care Team' },
+  { patient: 'David K. Mensah', task: 'Reported moderate knee pain (score 6/10)', due: 'Today 5 PM', tone: 'amber' as const, assignee: 'Dr. Okafor' },
+  { patient: 'James R. Okafor', task: 'Confirm cardiology appointment', due: 'Today 3 PM', tone: 'amber' as const, assignee: 'Reception' },
+];
+
+const surveyFeed = [
+  { name: 'Fatima Al-Hassan', msg: '"Feeling much better, pain is 2/10. No fever."', time: '10 min ago', good: true },
+  { name: 'Priya S. Nair', msg: '"Blood sugar was 142 this morning before breakfast."', time: '38 min ago', good: true },
+  { name: 'Mei-Ling Zhao', msg: '"Nausea is manageable. Appetite improved."', time: '1h ago', good: true },
+  { name: 'David K. Mensah', msg: '"Knee is swollen and pain went from 4 to 6 today."', time: '2h ago', good: false },
+];
+
+function SentimentDot({ s }: { s: string }) {
+  const m = sentimentMap[s] ?? sentimentMap.good;
+  return <span className={`inline-block h-2 w-2 rounded-full ${m.dot}`} />;
+}
+
+export function Patient360View() {
+  const [tab, setTab] = useState<'patients' | 'tasks' | 'surveys' | 'analytics'>('patients');
+  const [selected, setSelected] = useState<(typeof p360Patients)[0] | null>(null);
+
+  return (
+    <>
+      <PageHeader
+        crumb="Patient 360°"
+        title="Patient 360° — Post-Discharge Care"
+        subtitle="HospAI · Keppler AI-powered outreach & recovery tracking"
+        actions={
+          <>
+            <GhostBtn>
+              <FilterIcon size={13} /> Filter
+            </GhostBtn>
+            <PrimaryBtn>
+              <PlusIcon size={13} /> Start Journey
+            </PrimaryBtn>
+          </>
+        }
+      />
+
+      {/* KPI row */}
+      <StatRow
+        stats={[
+          { v: '148', l: 'Active Journeys', c: 'text-brand-600' },
+          { v: '87%', l: 'Response Rate', c: 'text-emerald-600' },
+          { v: '12', l: 'Pending Escalations', c: 'text-rose-600' },
+          { v: '31', l: 'Appts Confirmed', c: 'text-violet-600' },
+          { v: '3.2d', l: 'Avg First Response' },
+        ]}
+      />
+
+      {/* Sub-tabs */}
+      <div className="px-6 pt-3">
+        <Segmented
+          options={['patients', 'tasks', 'surveys', 'analytics']}
+          labels={['Care Journeys', 'Tasks & Escalations', 'Survey Feed', 'Analytics']}
+          value={tab}
+          onChange={(v) => setTab(v as typeof tab)}
+        />
+      </div>
+
+      <Body>
+        {tab === 'patients' && (
+          <div className="grid grid-cols-3 gap-4 h-full">
+            {/* Left: patient list */}
+            <div className="col-span-selected bg-white rounded-lg border border-slate-200 overflow-hidden flex flex-col" style={{ gridColumn: selected ? '1' : '1 / span 3' }}>
+              <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                <span className="text-[12px] font-semibold text-slate-700">Active Patients ({p360Patients.length})</span>
+                <div className="flex items-center gap-1.5 rounded-md bg-slate-50 border border-slate-200 px-2.5 py-1">
+                  <SearchIcon size={11} className="text-slate-400" />
+                  <span className="text-[11px] text-slate-400">Search patients…</span>
+                </div>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                {p360Patients.map((p) => {
+                  const sm = sentimentMap[p.sentiment];
+                  const isSelected = selected?.mrn === p.mrn;
+                  return (
+                    <div
+                      key={p.mrn}
+                      onClick={() => setSelected(isSelected ? null : p)}
+                      className={`flex items-start gap-3 px-4 py-3.5 border-b border-slate-100 cursor-pointer transition-colors ${isSelected ? 'bg-brand-50 border-l-2 border-l-brand-600' : 'hover:bg-slate-50'}`}
+                    >
+                      {/* Avatar */}
+                      <div className="h-8 w-8 rounded-full bg-gradient-to-br from-brand-500 to-violet-500 flex items-center justify-center shrink-0">
+                        <span className="text-white text-[11px] font-bold">{p.name.split(' ').map(x => x[0]).slice(0, 2).join('')}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[13px] font-semibold text-slate-900 truncate">{p.name}</span>
+                          <Pill tone={sm.pill}>{sm.label}</Pill>
+                        </div>
+                        <div className="text-[11px] text-slate-500 mt-0.5 truncate">{p.mrn} · {p.condition}</div>
+                        <div className="flex items-center gap-3 mt-1.5 text-[11px] text-slate-500">
+                          <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />{p.whatsapp}</span>
+                          <span>Discharged {p.discharged}</span>
+                          <span>Next: {p.nextAppt}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right: patient 360 detail panel */}
+            {selected && (
+              <div className="col-span-2 bg-white rounded-lg border border-slate-200 overflow-hidden flex flex-col" style={{ gridColumn: '2 / span 2' }}>
+                {/* Patient banner */}
+                <div className="px-5 py-4 bg-gradient-to-r from-brand-700 to-violet-700 text-white">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="text-[15px] font-bold">{selected.name}</div>
+                      <div className="text-[11px] text-brand-200 mt-0.5">{selected.mrn} · {selected.age}y · {selected.sex} · {selected.condition}</div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="rounded-md bg-white/20 hover:bg-white/30 px-2.5 py-1 text-[11px] font-semibold">Send Message</button>
+                      <button className="rounded-md bg-white/20 hover:bg-white/30 px-2.5 py-1 text-[11px] font-semibold">View Chart</button>
+                    </div>
+                  </div>
+                  <div className="mt-3 flex gap-4 text-[11px]">
+                    <span className="bg-white/15 rounded px-2 py-0.5">{selected.journey}</span>
+                    <span className="bg-white/15 rounded px-2 py-0.5">Discharged {selected.discharged}</span>
+                    <span className="bg-white/15 rounded px-2 py-0.5">Next Appt: {selected.nextAppt}</span>
+                  </div>
+                </div>
+
+                {/* Recovery score + survey responses */}
+                <div className="grid grid-cols-3 divide-x divide-slate-100 border-b border-slate-100">
+                  {[
+                    { label: 'Survey Responses', value: String(selected.responses), sub: `${selected.pending} pending`, color: 'text-brand-600' },
+                    { label: 'WhatsApp Status', value: selected.whatsapp, sub: 'Last: 2h ago', color: selected.whatsapp === 'No Reply' ? 'text-rose-600' : 'text-emerald-600' },
+                    { label: 'Recovery Sentiment', value: sentimentMap[selected.sentiment].label, sub: 'AI analysis', color: selected.sentiment === 'good' ? 'text-emerald-600' : selected.sentiment === 'warn' ? 'text-amber-600' : 'text-rose-600' },
+                  ].map((s) => (
+                    <div key={s.label} className="px-4 py-3 text-center">
+                      <div className={`text-[18px] font-bold ${s.color}`}>{s.value}</div>
+                      <div className="text-[11px] text-slate-500">{s.label}</div>
+                      <div className="text-[10px] text-slate-400">{s.sub}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Keppler AI insight */}
+                <div className="mx-4 my-3 rounded-lg bg-violet-50 border border-violet-200 px-4 py-3">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <SparkIcon size={13} className="text-violet-600" />
+                    <span className="text-[11px] font-bold text-violet-700 tracking-wide">KEPPLER AI · RECOVERY INSIGHT</span>
+                  </div>
+                  <p className="text-[12px] text-violet-900 leading-relaxed">
+                    Patient's latest responses show <strong>stable recovery trajectory</strong>. Pain scores trended from 7/10 at discharge to 3/10 today. 
+                    Recommend confirming {selected.nextAppt} appointment and sending medication adherence check-in by EOD.
+                  </p>
+                </div>
+
+                {/* Timeline */}
+                <div className="px-4 pb-4 flex-1 overflow-y-auto">
+                  <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-3">Journey Timeline</div>
+                  {[
+                    { icon: '📤', time: `Discharged ${selected.discharged}`, label: 'Discharge summary sent to patient via portal', ok: true },
+                    { icon: '💬', time: 'Day 1', label: 'Welcome WhatsApp survey sent · Patient responded', ok: true },
+                    { icon: '📋', time: 'Day 2', label: 'Day 2 check-in survey sent · ' + (selected.responses > 1 ? 'Responded' : 'Awaiting'), ok: selected.responses > 1 },
+                    { icon: '📅', time: `Next: ${selected.nextAppt}`, label: 'Follow-up appointment scheduled · Reminder queued', ok: true },
+                  ].map((e, i) => (
+                    <div key={i} className="flex items-start gap-3 mb-3">
+                      <div className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[11px] shrink-0">{e.icon}</div>
+                      <div>
+                        <div className="text-[11px] font-semibold text-slate-700">{e.time}</div>
+                        <div className="text-[11px] text-slate-500">{e.label}</div>
+                      </div>
+                      <div className={`ml-auto h-2 w-2 rounded-full mt-1.5 ${e.ok ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === 'tasks' && (
+          <div className="space-y-3">
+            <div className="text-[12px] font-semibold text-slate-500 uppercase tracking-wider mb-2">Open Tasks & Escalations</div>
+            {taskQueue.map((t, i) => (
+              <div key={i} className={`flex items-start gap-4 rounded-lg border p-4 bg-white ${t.tone === 'red' ? 'border-rose-200' : t.tone === 'amber' ? 'border-amber-200' : 'border-slate-200'}`}>
+                <div className={`h-8 w-8 rounded-full flex items-center justify-center shrink-0 ${t.tone === 'red' ? 'bg-rose-50' : t.tone === 'amber' ? 'bg-amber-50' : 'bg-slate-50'}`}>
+                  <AlertIcon size={14} className={t.tone === 'red' ? 'text-rose-600' : t.tone === 'amber' ? 'text-amber-600' : 'text-slate-500'} />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[13px] font-semibold text-slate-900">{t.patient}</span>
+                    <Pill tone={t.tone}>{t.due}</Pill>
+                  </div>
+                  <div className="text-[12px] text-slate-600 mt-0.5">{t.task}</div>
+                  <div className="text-[11px] text-slate-400 mt-1">Assigned to: {t.assignee}</div>
+                </div>
+                <button className="rounded-md border border-slate-200 px-3 py-1.5 text-[11px] font-medium text-slate-700 hover:bg-slate-50 shrink-0">Resolve</button>
+              </div>
+            ))}
+            <div className="text-center py-6 text-[12px] text-slate-400">No further open tasks</div>
+          </div>
+        )}
+
+        {tab === 'surveys' && (
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
+              <div className="px-4 py-3 border-b border-slate-100 text-[12px] font-semibold text-slate-700 flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                Live Survey Responses
+              </div>
+              <div className="divide-y divide-slate-100">
+                {surveyFeed.map((r, i) => (
+                  <div key={i} className={`px-4 py-3.5 ${!r.good ? 'bg-rose-50' : ''}`}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[12px] font-semibold text-slate-900">{r.name}</span>
+                      <span className="text-[10px] text-slate-400">{r.time}</span>
+                    </div>
+                    <p className="text-[12px] text-slate-600 italic leading-relaxed">{r.msg}</p>
+                    {!r.good && <div className="mt-1.5 text-[10px] text-rose-600 font-semibold">⚠ Flagged for review</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="bg-white rounded-lg border border-slate-200 p-4 flex flex-col gap-4">
+              <div className="text-[12px] font-semibold text-slate-700">Outreach Summary</div>
+              {[
+                { label: 'Surveys Sent (7d)', value: 248, total: 248, color: 'bg-brand-600' },
+                { label: 'Delivered', value: 241, total: 248, color: 'bg-emerald-500' },
+                { label: 'Responded', value: 216, total: 248, color: 'bg-violet-500' },
+                { label: 'Escalated', value: 12, total: 248, color: 'bg-rose-500' },
+              ].map((s) => (
+                <div key={s.label}>
+                  <div className="flex justify-between text-[11px] text-slate-600 mb-1">
+                    <span>{s.label}</span>
+                    <span className="font-semibold text-slate-900">{s.value}</span>
+                  </div>
+                  <div className="h-1.5 w-full rounded-full bg-slate-100">
+                    <div className={`h-full rounded-full ${s.color}`} style={{ width: `${(s.value / s.total) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tab === 'analytics' && (
+          <div className="grid grid-cols-2 gap-4">
+            <Panel title="Response Rate Trend">
+              <Sparkline values={[62, 68, 71, 75, 79, 82, 85, 84, 87, 87]} color="#6366f1" height={80} />
+              <div className="mt-2 text-[12px] text-emerald-600 font-semibold">↑ 25pp improvement over 30 days</div>
+            </Panel>
+            <Panel title="Journey Performance">
+              {[
+                { j: 'Cardiac Recovery', rate: 92, tone: 'text-emerald-600' },
+                { j: 'Diabetes Follow-up', rate: 88, tone: 'text-emerald-600' },
+                { j: 'Ortho Rehabilitation', rate: 76, tone: 'text-amber-600' },
+                { j: 'Oncology Support', rate: 95, tone: 'text-emerald-600' },
+                { j: 'Maternal Recovery', rate: 98, tone: 'text-emerald-600' },
+                { j: 'Hypertension Watch', rate: 61, tone: 'text-rose-600' },
+              ].map((j) => (
+                <div key={j.j} className="flex items-center gap-3 mb-2">
+                  <span className="text-[11px] text-slate-600 w-36 truncate">{j.j}</span>
+                  <div className="flex-1 h-1.5 rounded-full bg-slate-100">
+                    <div className="h-full rounded-full bg-brand-500" style={{ width: `${j.rate}%` }} />
+                  </div>
+                  <span className={`text-[11px] font-bold w-8 text-right ${j.tone}`}>{j.rate}%</span>
+                </div>
+              ))}
+            </Panel>
+          </div>
+        )}
       </Body>
     </>
   );

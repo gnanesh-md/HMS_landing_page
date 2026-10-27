@@ -7,7 +7,7 @@ import {
 } from '../icons';
 import { DashCtx, Pill, useDash, useNow, type ChartPatient, type ViewId } from './ui';
 import { ERView, ICUView, IPView, MainDashboard, OPView, PatientsView } from './clinicalViews';
-import { AnalyticsView, BillingView, GenericView, LabView, OTView, PharmacyView } from './opsViews';
+import { AnalyticsView, BillingView, GenericView, LabView, OTView, Patient360View, PharmacyView } from './opsViews';
 import { DoctorWorkspace, InsuranceView, NurseStation } from './careViews';
 import { AIHubView, type AiId } from './aiViews';
 
