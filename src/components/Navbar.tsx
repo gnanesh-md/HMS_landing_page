@@ -40,13 +40,11 @@ export function Logo({
   imgClassName?: string;
 }) {
   return (
-    <span className={`inline-flex items-center ${className}`}>
+    <span className={`inline-flex items-center ${dark ? 'bg-white rounded-xl p-2 shadow-sm' : ''} ${className}`}>
       <img
         src={hospAiLogo}
         alt="HospAI"
-        className={`h-14 sm:h-18 md:h-20 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
-          dark ? 'brightness-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.08)]' : ''
-        } ${imgClassName}`}
+        className={`h-16 sm:h-20 md:h-24 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${dark ? 'rounded-lg' : ''} ${imgClassName}`}
       />
     </span>
   );
@@ -124,7 +122,7 @@ export default function Navbar() {
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 sm:h-24 flex items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 sm:h-24 md:h-28 flex items-center justify-between">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
               <Logo />
             </Link>
