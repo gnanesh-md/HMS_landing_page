@@ -6,7 +6,6 @@ import { EDMini, ICUMini } from './MiniScreens';
 import { AlertIcon, ArrowRightIcon, CheckIcon, MicIcon, PlayIcon, ZapIcon } from './icons';
 import { BrowserFrame, scrollToId } from './ui';
 import hospAiLogo from '../assets/logo.png';
-import heroLogoBg from '../assets/hero-logo-bg.png';
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -46,18 +45,29 @@ export default function Hero() {
           <div className="lg:col-span-7 text-left">
             <button
               onClick={() => scrollToId('#dashboard')}
-              className="animate-fade-in inline-flex items-center gap-2 rounded-full border border-rose-200/80 bg-white/90 backdrop-blur pl-1.5 pr-3.5 py-1 text-[13px] text-slate-600 shadow-sm hover:border-rose-300 transition-colors"
+              className="animate-fade-in group inline-flex items-center gap-2 rounded-full border border-rose-200/80 bg-white/90 backdrop-blur pl-1.5 pr-3.5 py-1 text-[13px] text-slate-600 shadow-sm hover:border-rose-300 hover:shadow-md transition-all duration-300"
             >
-              <span className="flex items-center gap-1 rounded-full bg-[#e11d48] text-white text-[11px] font-bold px-2.5 py-0.5">
+              <span className="relative flex items-center gap-1.5 rounded-full bg-[#e11d48] text-white text-[11px] font-bold px-2.5 py-0.5 shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-white animate-ping-slow" />
                 + HospAI
               </span>
-              <span className="font-medium text-slate-700">AI-driven hospital management, live in production</span>
-              <ArrowRightIcon size={13} className="text-slate-400" />
+              <span className="font-medium text-slate-700 group-hover:text-slate-900 transition-colors">AI-driven hospital management, live in production</span>
+              <ArrowRightIcon size={13} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" />
             </button>
 
             <h1 className="mt-6 font-display text-[42px] sm:text-[54px] lg:text-[62px] xl:text-[68px] font-extrabold text-slate-900 leading-[1.08] tracking-[-0.035em]">
-              The command center <br className="hidden sm:block" />
-              for your <span className="text-[#e11d48]">entire hospital.</span>
+              {['The', 'command', 'center'].map((w, i) => (
+                <span key={w} className="word-rise" style={{ animationDelay: `${0.08 + i * 0.08}s` }}>{w}&nbsp;</span>
+              ))}
+              <br className="hidden sm:block" />
+              {['for', 'your'].map((w, i) => (
+                <span key={w} className="word-rise" style={{ animationDelay: `${0.32 + i * 0.08}s` }}>{w}&nbsp;</span>
+              ))}
+              <span className="word-rise" style={{ animationDelay: '0.48s' }}>
+                <span className="text-shimmer bg-gradient-to-r from-[#e11d48] via-rose-500 to-[#e11d48] bg-clip-text text-transparent">
+                  entire hospital.
+                </span>
+              </span>
             </h1>
 
             <p className="animate-fade-in-up anim-delay-500 mt-6 text-[16.5px] sm:text-[18.5px] text-slate-600 leading-relaxed max-w-xl">
@@ -68,38 +78,31 @@ export default function Hero() {
             <div className="animate-fade-in-up anim-delay-600 mt-8 flex flex-wrap items-center gap-3.5">
               <button
                 onClick={() => navigate('/book-demo')}
-                className="btn-shine inline-flex items-center justify-center gap-2 h-[48px] px-6 rounded-xl bg-[#e11d48] hover:bg-[#be123c] text-white text-[15px] font-semibold shadow-lg shadow-rose-600/25 hover:-translate-y-0.5 transition-all"
+                className="btn-shine group inline-flex items-center justify-center gap-2 h-[48px] px-6 rounded-xl bg-[#e11d48] hover:bg-[#be123c] text-white text-[15px] font-semibold shadow-lg shadow-rose-600/25 hover:shadow-rose-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
               >
-                Book a live demo <ArrowRightIcon size={16} />
+                Book a live demo <ArrowRightIcon size={16} className="transition-transform group-hover:translate-x-1" />
               </button>
               <button
                 onClick={() => scrollToId('#dashboard')}
-                className="inline-flex items-center justify-center gap-2 h-[48px] px-6 rounded-xl border border-slate-200/90 bg-white text-slate-800 text-[15px] font-semibold hover:border-slate-300 hover:bg-slate-50 shadow-sm transition-all"
+                className="group inline-flex items-center justify-center gap-2 h-[48px] px-6 rounded-xl border border-slate-200/90 bg-white text-slate-800 text-[15px] font-semibold hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 active:translate-y-0 shadow-sm transition-all duration-200"
               >
-                <PlayIcon size={13} className="text-[#e11d48] fill-[#e11d48]" /> Explore the dashboard
+                <PlayIcon size={13} className="text-[#e11d48] fill-[#e11d48] transition-transform group-hover:scale-110" /> Explore the dashboard
               </button>
             </div>
           </div>
 
-          {/* Right Column: HospAI Logo with 3D glass aura backdrop */}
+          {/* Right Column: HospAI Logo with smooth floating animation & subtle breathing aura */}
           <div className="lg:col-span-5 flex items-center justify-center relative my-4 lg:my-0">
-            <div className="relative flex items-center justify-center w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[540px]">
-              {/* Glass Aura Graphic */}
-              <img
-                src={heroLogoBg}
-                alt=""
-                aria-hidden="true"
-                className="w-full h-auto object-contain pointer-events-none select-none drop-shadow-sm"
-              />
+            {/* Ambient breathing aura behind logo */}
+            <div className="absolute w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] rounded-full bg-gradient-to-tr from-rose-200/30 via-purple-200/25 to-sky-200/30 blur-3xl pointer-events-none animate-pulse-glow" />
 
-              {/* HospAI Brand Logo placed directly over the aura */}
-              <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-8">
-                <img
-                  src={hospAiLogo}
-                  alt="HospAI - AI-Driven Healthcare Optimization"
-                  className="w-[78%] sm:w-[74%] object-contain select-none transition-transform duration-500 hover:scale-[1.02]"
-                />
-              </div>
+            {/* Floating Logo showcase */}
+            <div className="relative z-10 p-4 sm:p-6 flex items-center justify-center animate-float-gentle">
+              <img
+                src={hospAiLogo}
+                alt="HospAI - AI-Driven Healthcare Optimization"
+                className="w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[450px] object-contain select-none drop-shadow-[0_15px_30px_rgba(15,23,42,0.08)] transition-all duration-500 hover:scale-[1.03] hover:drop-shadow-[0_20px_40px_rgba(225,29,72,0.14)]"
+              />
             </div>
           </div>
         </div>
