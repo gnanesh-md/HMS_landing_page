@@ -51,7 +51,7 @@ export function Logo({
       <img
         src={logoSrc}
         alt="HospAI"
-        className={`${dark ? 'h-14 sm:h-16 md:h-20' : sizeClasses} w-auto object-contain select-none transition-all duration-300 hover:scale-[1.02] ${imgClassName}`}
+        className={`${dark ? 'h-20 sm:h-24 md:h-28' : sizeClasses} w-auto object-contain select-none transition-all duration-300 hover:scale-[1.02] ${imgClassName}`}
 
 
       />
