@@ -42,7 +42,7 @@ export function Logo({
   imgClassName?: string;
   compact?: boolean;
 }) {
-  const sizeClasses = compact ? 'h-11 sm:h-12' : 'h-16 sm:h-20';
+  const sizeClasses = compact ? 'h-11 sm:h-12' : 'h-18 sm:h-22 md:h-24';
 
   return (
     <span className={`inline-flex items-center transition-all duration-300 ${className}`}>
@@ -131,7 +131,7 @@ export default function Navbar() {
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div className={`mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between transition-all duration-300 ease-in-out ${scrolled ? 'h-16' : 'h-20 sm:h-24'}`}>
+          <div className={`mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between transition-all duration-300 ease-in-out ${scrolled ? 'h-16' : 'h-22 sm:h-26 md:h-28'}`}>
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
               <Logo compact={scrolled} />
             </Link>
