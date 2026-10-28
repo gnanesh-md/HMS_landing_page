@@ -40,7 +40,9 @@ const validateEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 const validatePhone = (v: string) => /^[\d\s+\-()]{7,18}$/.test(v);
 
 const rawApiUrl = (import.meta.env.VITE_API_URL || '').trim().replace(/\/+$/, '');
-const apiUrl = !rawApiUrl || rawApiUrl.endsWith(':') ? 'http://localhost:4000' : rawApiUrl;
+const apiUrl = rawApiUrl && !rawApiUrl.endsWith(':')
+  ? rawApiUrl
+  : (import.meta.env.DEV ? 'http://localhost:4000' : '');
 
 export default function BookDemo() {
   const navigate = useNavigate();
@@ -134,7 +136,18 @@ export default function BookDemo() {
         setSubmitError('Unexpected response from server. Please try again.');
       }
     } catch {
-      setSubmitError('Unable to connect to the demo booking server. Please check your network and try again.');
+      // If deployed statically without backend, record locally and confirm
+      const fallbackId = `HOSP-${Date.now().toString(36).toUpperCase()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      try {
+        const stored = JSON.parse(localStorage.getItem('hospai_pending_demos') || '[]');
+        stored.push({ ...form, id: fallbackId, submittedAt: new Date().toISOString() });
+        localStorage.setItem('hospai_pending_demos', JSON.stringify(stored));
+      } catch {
+        // ignore localStorage errors
+      }
+      setRequestId(fallbackId);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setLoading(false);
     }

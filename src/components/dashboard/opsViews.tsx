@@ -552,8 +552,13 @@ export function Patient360View() {
       {/* Sub-tabs */}
       <div className="px-6 pt-3">
         <Segmented
-          options={['patients', 'tasks', 'surveys', 'analytics']}
-          labels={['Care Journeys', 'Tasks & Escalations', 'Survey Feed', 'Analytics']}
+          options={[
+            { id: 'patients', label: 'Care Journeys' },
+            { id: 'tasks', label: 'Tasks & Escalations' },
+            { id: 'surveys', label: 'Survey Feed' },
+            { id: 'analytics', label: 'Analytics' },
+          ]}
+
           value={tab}
           onChange={(v) => setTab(v as typeof tab)}
         />
@@ -744,7 +749,7 @@ export function Patient360View() {
         {tab === 'analytics' && (
           <div className="grid grid-cols-2 gap-4">
             <Panel title="Response Rate Trend">
-              <Sparkline values={[62, 68, 71, 75, 79, 82, 85, 84, 87, 87]} color="#6366f1" height={80} />
+              <Sparkline id="p360-response-trend" data={[62, 68, 71, 75, 79, 82, 85, 84, 87, 87]} color="#6366f1" h={80} />
               <div className="mt-2 text-[12px] text-emerald-600 font-semibold">↑ 25pp improvement over 30 days</div>
             </Panel>
             <Panel title="Journey Performance">
