@@ -5,15 +5,27 @@ import { Logo } from './Navbar';
 import { ArrowRightIcon, ChevronRightIcon } from './icons';
 
 /** Shared chrome for secondary pages (Book a demo, legal pages, 404). */
-export default function PageLayout({ children, hideCta = false }: { children: ReactNode; hideCta?: boolean }) {
+export default function PageLayout({
+  children,
+  hideCta = false,
+  hideLogo = false,
+}: {
+  children: ReactNode;
+  hideCta?: boolean;
+  hideLogo?: boolean;
+}) {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-slate-200/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
-          <Link to="/" aria-label="HospAI home"><Logo /></Link>
+          {!hideLogo ? (
+            <Link to="/" aria-label="HospAI home"><Logo /></Link>
+          ) : (
+            <div className="w-1" />
+          )}
           <div className="flex items-center gap-2">
-            <Link to="/" className="hidden sm:inline-flex items-center gap-1 px-3 h-9 text-[14px] font-medium text-slate-600 hover:text-slate-900">
+            <Link to="/" className="inline-flex items-center gap-1 px-3 h-9 text-[14px] font-medium text-slate-600 hover:text-slate-900">
               <ChevronRightIcon size={14} className="rotate-180" /> Back to home
             </Link>
             {!hideCta && (

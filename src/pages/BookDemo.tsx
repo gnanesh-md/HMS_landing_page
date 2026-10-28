@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PageLayout from '../components/PageLayout';
+import hospAiLogo from '../assets/logo.png';
 import { ArrowRightIcon, CalendarIcon, CheckIcon, ClockIcon, PlayIcon, ShieldCheckIcon, UsersIcon } from '../components/icons';
 
 type FormState = {
@@ -158,7 +159,7 @@ export default function BookDemo() {
   if (submitted) {
     const when = new Date(`${form.preferredDate}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
     return (
-      <PageLayout hideCta>
+      <PageLayout hideCta hideLogo>
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 bg-grid mask-fade-b pointer-events-none" />
           <div className="relative mx-auto max-w-2xl px-4 sm:px-6 py-20 sm:py-28">
@@ -213,17 +214,31 @@ export default function BookDemo() {
   }
 
   return (
-    <PageLayout hideCta>
+    <PageLayout hideCta hideLogo>
       <section className="relative overflow-hidden border-b border-slate-200 bg-slate-50">
         <div className="absolute inset-0 bg-grid mask-fade-b pointer-events-none" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-14 pb-12 sm:pt-20 sm:pb-16">
-          <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-600 animate-fade-in">Book a demo</div>
-          <h1 className="mt-3 font-display text-[36px] sm:text-[52px] font-extrabold text-slate-900 leading-[1.05] tracking-tight max-w-3xl animate-fade-in-up">
-            See HospAI running for <span className="text-brand-600">your hospital.</span>
-          </h1>
-          <p className="mt-4 text-[17px] text-slate-600 leading-relaxed max-w-2xl animate-fade-in-up anim-delay-100">
-            Tell us a little about your hospital and pick a time. We'll tailor a 45-minute live session to the departments you care about most.
-          </p>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-12 pb-12 sm:pt-16 sm:pb-16">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 lg:gap-12">
+            <div className="max-w-2xl">
+              <div className="text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-600 animate-fade-in">Book a demo</div>
+              <h1 className="mt-3 font-display text-[34px] sm:text-[46px] lg:text-[52px] font-extrabold text-slate-900 leading-[1.08] tracking-tight animate-fade-in-up">
+                See HospAI running for <span className="text-brand-600">your hospital.</span>
+              </h1>
+              <p className="mt-4 text-[16px] sm:text-[17px] text-slate-600 leading-relaxed animate-fade-in-up anim-delay-100">
+                Tell us a little about your hospital and pick a time. We'll tailor a 45-minute live session to the departments you care about most.
+              </p>
+            </div>
+
+            <div className="shrink-0 flex items-center justify-start md:justify-end animate-fade-in">
+              <Link to="/" aria-label="HospAI home" className="group block focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-2xl">
+                <img
+                  src={hospAiLogo}
+                  alt="HospAI"
+                  className="h-20 sm:h-28 md:h-36 lg:h-44 w-auto object-contain select-none transition-transform duration-300 group-hover:scale-105 drop-shadow-sm"
+                />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
