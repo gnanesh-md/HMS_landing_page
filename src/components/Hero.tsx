@@ -80,15 +80,28 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: HospAI Logo with glowing aura */}
-          <div className="lg:col-span-5 flex items-center justify-center relative">
-            {/* Ethereal background gradient aura */}
-            <div className="absolute -inset-4 sm:-inset-8 bg-gradient-to-tr from-rose-400/25 via-purple-300/25 to-sky-300/25 rounded-full blur-3xl pointer-events-none -z-10" />
-            <div className="relative p-2 sm:p-4 flex items-center justify-center">
+          {/* Right Column: HospAI Logo with rich glowing aura backdrop */}
+          <div className="lg:col-span-5 flex items-center justify-center relative my-6 lg:my-0">
+            {/* Multi-layered AI Aura Backdrop matching mockup */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+              {/* Outer soft ambient aura */}
+              <div className="w-[380px] h-[380px] sm:w-[480px] sm:h-[480px] rounded-full bg-gradient-to-tr from-rose-400/40 via-fuchsia-300/35 to-sky-300/40 blur-3xl transform scale-110" />
+              {/* Core vibrant glow ring */}
+              <div className="absolute w-[290px] h-[290px] sm:w-[380px] sm:h-[380px] rounded-full bg-gradient-to-br from-pink-500/30 via-purple-500/25 to-blue-400/25 blur-2xl" />
+              {/* Sweeping pink/rose accent crescent on left */}
+              <div className="absolute -left-6 sm:-left-12 w-[220px] h-[360px] rounded-[100px] bg-gradient-to-b from-rose-500/35 via-pink-400/25 to-transparent blur-2xl rotate-[-25deg]" />
+              {/* Purple/cyan accent on right */}
+              <div className="absolute -right-4 sm:-right-10 w-[220px] h-[340px] rounded-[100px] bg-gradient-to-b from-purple-400/30 via-sky-400/25 to-transparent blur-2xl rotate-[20deg]" />
+              {/* Inner luminous spotlight directly behind logo */}
+              <div className="absolute w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] rounded-full bg-white/75 blur-xl" />
+            </div>
+
+            {/* The Logo */}
+            <div className="relative z-10 p-2 sm:p-4 flex items-center justify-center">
               <img
                 src={hospAiLogo}
                 alt="HospAI - AI-Driven Healthcare Optimization"
-                className="w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] object-contain drop-shadow-sm select-none transition-transform duration-500 hover:scale-[1.02]"
+                className="w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] object-contain drop-shadow-[0_10px_25px_rgba(225,29,72,0.09)] select-none transition-transform duration-500 hover:scale-[1.02]"
               />
             </div>
           </div>
