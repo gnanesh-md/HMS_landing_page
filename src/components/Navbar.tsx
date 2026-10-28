@@ -31,15 +31,27 @@ export function LogoMark({ size = 42 }: { size?: number }) {
   );
 }
 
-export function Logo({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
+export function Logo({
+  dark = false,
+  className = '',
+  imgClassName = '',
+  compact = false,
+}: {
+  dark?: boolean;
+  className?: string;
+  imgClassName?: string;
+  compact?: boolean;
+}) {
+  const sizeClasses = compact ? 'h-11 sm:h-12' : 'h-16 sm:h-20';
+
   return (
-    <span className={`inline-flex items-center ${className}`}>
+    <span className={`inline-flex items-center transition-all duration-300 ${className}`}>
       <img
         src={hospAiLogo}
         alt="HospAI"
-        className={`h-12 sm:h-14 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
+        className={`${sizeClasses} w-auto object-contain select-none transition-all duration-300 hover:scale-[1.02] ${
           dark ? 'brightness-125' : ''
-        }`}
+        } ${imgClassName}`}
       />
     </span>
   );
@@ -119,9 +131,9 @@ export default function Navbar() {
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
+          <div className={`mx-auto max-w-7xl px-4 sm:px-6 flex items-center justify-between transition-all duration-300 ease-in-out ${scrolled ? 'h-16' : 'h-20 sm:h-24'}`}>
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
-              <Logo />
+              <Logo compact={scrolled} />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-0.5">
@@ -237,7 +249,7 @@ export default function Navbar() {
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setMenuOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[86%] max-w-sm bg-white shadow-2xl flex flex-col animate-slide-in-right">
             <div className="flex items-center justify-between px-5 h-16 border-b border-slate-100">
-              <Logo />
+              <Logo compact={scrolled} />
               <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2 text-slate-600" aria-label="Close menu"><XIcon size={22} /></button>
             </div>
             <nav className="flex-1 overflow-y-auto px-3 py-4">
