@@ -6,6 +6,7 @@ import { EDMini, ICUMini } from './MiniScreens';
 import { AlertIcon, ArrowRightIcon, CheckIcon, MicIcon, PlayIcon, ZapIcon } from './icons';
 import { BrowserFrame, scrollToId } from './ui';
 import hospAiLogo from '../assets/logo.png';
+import heroLogoBg from '../assets/hero-logo-bg.png';
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -35,8 +36,8 @@ export default function Hero() {
     <section ref={sectionRef} style={{ ['--lay' as string]: 1 }} className="relative pt-28 sm:pt-32 md:pt-36 pb-20 sm:pb-28 overflow-hidden bg-white">
       {/* Light stage: grid + soft coral/purple glows */}
       <div className="absolute inset-0 bg-grid mask-fade-b pointer-events-none" style={{ transform: 'translateY(calc(var(--sy, 0) * 0.25px))' }} />
-      <div className="hero-aurora absolute -top-40 left-[10%] h-[520px] w-[520px] rounded-full bg-rose-200/30 blur-[110px] pointer-events-none" />
-      <div className="hero-aurora absolute -top-24 right-[8%] h-[500px] w-[560px] rounded-full bg-purple-200/25 blur-[120px] pointer-events-none" style={{ animationDelay: '-6s' }} />
+      <div className="hero-aurora absolute -top-40 left-[10%] h-[520px] w-[520px] rounded-full bg-rose-200/25 blur-[110px] pointer-events-none" />
+      <div className="hero-aurora absolute -top-24 right-[8%] h-[500px] w-[560px] rounded-full bg-purple-200/20 blur-[120px] pointer-events-none" style={{ animationDelay: '-6s' }} />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         {/* 2-column hero stage matching mockup */}
@@ -80,18 +81,25 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: HospAI Logo with clean, minimalist backdrop */}
-          <div className="lg:col-span-5 flex items-center justify-center relative">
-            {/* Minimalist whisper-soft ambient glow */}
-            <div className="absolute w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] rounded-full bg-rose-100/40 blur-3xl pointer-events-none" />
-
-            {/* The Logo */}
-            <div className="relative z-10 p-4 flex items-center justify-center">
+          {/* Right Column: HospAI Logo with 3D glass aura backdrop */}
+          <div className="lg:col-span-5 flex items-center justify-center relative my-4 lg:my-0">
+            <div className="relative flex items-center justify-center w-full max-w-[440px] sm:max-w-[500px] lg:max-w-[540px]">
+              {/* Glass Aura Graphic */}
               <img
-                src={hospAiLogo}
-                alt="HospAI - AI-Driven Healthcare Optimization"
-                className="w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] object-contain select-none transition-transform duration-300 hover:scale-[1.01]"
+                src={heroLogoBg}
+                alt=""
+                aria-hidden="true"
+                className="w-full h-auto object-contain pointer-events-none select-none drop-shadow-sm"
               />
+
+              {/* HospAI Brand Logo placed directly over the aura */}
+              <div className="absolute inset-0 flex items-center justify-center p-6 sm:p-8">
+                <img
+                  src={hospAiLogo}
+                  alt="HospAI - AI-Driven Healthcare Optimization"
+                  className="w-[78%] sm:w-[74%] object-contain select-none transition-transform duration-500 hover:scale-[1.02]"
+                />
+              </div>
             </div>
           </div>
         </div>
