@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import hospAiLogo from '../assets/logo.png';
 import hospAiLogoDark from '../assets/logo-dark.png';
 import { ArrowRightIcon, ChevronDownIcon, MenuIcon, XIcon } from './icons';
@@ -107,17 +107,12 @@ export default function Navbar() {
             className="bg-white/95 backdrop-blur-xl border border-slate-200/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] rounded-2xl h-16 flex items-center justify-between px-4 sm:px-6 transition-all duration-300"
             onMouseLeave={() => setMega(false)}
           >
-            {/* Left: HospAI Logo */}
-            <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home" className="shrink-0 flex items-center">
-              <Logo compact />
-            </Link>
-
-            {/* Center: Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
+            {/* Navigation Links (Desktop) */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               <button
                 onMouseEnter={() => setMega(true)}
                 onClick={() => setMega((m) => !m)}
-                className={`flex items-center gap-1 px-2.5 xl:px-3 h-9 rounded-lg text-[13.5px] xl:text-[14px] font-medium transition-colors ${
+                className={`flex items-center gap-1 px-3 h-9 rounded-lg text-[13.5px] xl:text-[14px] font-medium transition-colors ${
                   mega ? 'text-slate-900 bg-slate-100' : 'text-slate-600 hover:text-slate-900'
                 }`}
                 aria-expanded={mega}
@@ -127,7 +122,7 @@ export default function Navbar() {
 
               <button
                 onClick={() => goTo('#modules')}
-                className="flex items-center gap-1 px-2.5 xl:px-3 h-9 rounded-lg text-[13.5px] xl:text-[14px] font-medium text-slate-600 hover:text-slate-900 transition-colors"
+                className="flex items-center gap-1 px-3 h-9 rounded-lg text-[13.5px] xl:text-[14px] font-medium text-slate-600 hover:text-slate-900 transition-colors"
               >
                 Modules <ChevronDownIcon size={13} />
               </button>
@@ -137,36 +132,44 @@ export default function Navbar() {
                   key={l.label}
                   onMouseEnter={() => setMega(false)}
                   onClick={() => goTo(l.href)}
-                  className={`relative px-2.5 xl:px-3 h-9 rounded-lg text-[13.5px] xl:text-[14px] font-medium transition-colors ${
+                  className={`relative px-3 h-9 rounded-lg text-[13.5px] xl:text-[14px] font-medium transition-colors ${
                     current === l.href ? 'text-slate-900 font-semibold' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {l.label}
                   {current === l.href && (
-                    <span className="absolute left-2.5 right-2.5 -bottom-0.5 h-0.5 rounded-full bg-[#e11d48]" />
+                    <span className="absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-[#e11d48]" />
                   )}
                 </button>
               ))}
             </nav>
 
+            {/* Mobile Nav Header items */}
+            <button
+              className="lg:hidden flex items-center gap-2 p-1.5 rounded-lg text-slate-700 hover:bg-slate-100"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+            >
+              <MenuIcon size={22} />
+              <span className="text-[14px] font-medium text-slate-800">Menu</span>
+            </button>
+
             {/* Right: Actions */}
-            <div className="hidden lg:flex items-center gap-2.5">
-              <div className="h-5 w-px bg-slate-200 mx-1" />
-              <button onClick={openDashboard} className="px-3 h-9 text-[13.5px] xl:text-[14px] font-medium text-slate-700 hover:text-slate-900">
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <button
+                onClick={openDashboard}
+                className="hidden lg:inline-flex items-center px-3 h-9 text-[13.5px] xl:text-[14px] font-medium text-slate-700 hover:text-slate-900"
+              >
                 Live demo
               </button>
+              <div className="hidden lg:block h-5 w-px bg-slate-200 mx-1" />
               <button
                 onClick={() => navigate('/book-demo')}
-                className="btn-shine inline-flex items-center gap-1.5 h-9 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-[13.5px] xl:text-[14px] font-semibold transition-colors shadow-sm"
+                className="btn-shine inline-flex items-center gap-1.5 h-9 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-[13px] sm:text-[13.5px] xl:text-[14px] font-semibold transition-colors shadow-sm"
               >
                 Book a demo <ArrowRightIcon size={14} />
               </button>
             </div>
-
-            {/* Mobile Hamburger Button */}
-            <button className="lg:hidden p-2 -mr-1 rounded-md text-slate-700 hover:bg-slate-100" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-              <MenuIcon size={22} />
-            </button>
           </div>
 
           {/* Mega dropdown menu */}
@@ -245,7 +248,7 @@ export default function Navbar() {
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setMenuOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[86%] max-w-sm bg-white shadow-2xl flex flex-col animate-slide-in-right">
             <div className="flex items-center justify-between px-5 h-16 border-b border-slate-100">
-              <Logo compact />
+              <span className="font-display font-bold text-[18px] text-slate-900">Navigation</span>
               <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2 text-slate-600" aria-label="Close menu"><XIcon size={22} /></button>
             </div>
             <nav className="flex-1 overflow-y-auto px-3 py-4">
