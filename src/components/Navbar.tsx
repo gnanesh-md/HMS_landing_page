@@ -40,11 +40,11 @@ export function Logo({
   imgClassName?: string;
 }) {
   return (
-    <span className={`inline-flex items-center ${dark ? 'bg-white rounded-xl p-2 shadow-sm' : ''} ${className}`}>
+    <span className={`inline-flex items-center ${dark ? 'bg-white rounded-2xl p-2.5 shadow-md' : ''} ${className}`}>
       <img
         src={hospAiLogo}
         alt="HospAI"
-        className={`h-16 sm:h-20 md:h-24 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${dark ? 'rounded-lg' : ''} ${imgClassName}`}
+        className={`h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${dark ? 'rounded-xl' : ''} ${imgClassName}`}
       />
     </span>
   );
@@ -122,7 +122,7 @@ export default function Navbar() {
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-20 sm:h-24 md:h-28 flex items-center justify-between">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-24 sm:h-28 md:h-32 flex items-center justify-between">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
               <Logo />
             </Link>
@@ -238,7 +238,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[60] lg:hidden">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setMenuOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[86%] max-w-sm bg-white shadow-2xl flex flex-col animate-slide-in-right">
-            <div className="flex items-center justify-between px-5 h-20 border-b border-slate-100">
+            <div className="flex items-center justify-between px-5 h-24 border-b border-slate-100">
               <Logo />
               <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2 text-slate-600" aria-label="Close menu"><XIcon size={22} /></button>
             </div>
