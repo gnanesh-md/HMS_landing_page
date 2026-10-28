@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import hospAiLogo from '../assets/logo.png';
+import hospAiLogoDark from '../assets/logo-dark.png';
 import { ArrowRightIcon, ChevronDownIcon, MenuIcon, XIcon } from './icons';
 import { moduleGroups, showDashboard } from './moduleData';
 import { scrollToId } from './ui';
@@ -43,15 +44,16 @@ export function Logo({
   compact?: boolean;
 }) {
   const sizeClasses = compact ? 'h-11 sm:h-12' : 'h-18 sm:h-22 md:h-24';
+  const logoSrc = dark ? hospAiLogoDark : hospAiLogo;
 
   return (
     <span className={`inline-flex items-center transition-all duration-300 ${className}`}>
       <img
-        src={hospAiLogo}
+        src={logoSrc}
         alt="HospAI"
-        className={`${sizeClasses} w-auto object-contain select-none transition-all duration-300 hover:scale-[1.02] ${
-          dark ? 'brightness-125' : ''
-        } ${imgClassName}`}
+        className={`${dark ? 'h-14 sm:h-16 md:h-20' : sizeClasses} w-auto object-contain select-none transition-all duration-300 hover:scale-[1.02] ${imgClassName}`}
+
+
       />
     </span>
   );
