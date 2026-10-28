@@ -42,12 +42,12 @@ export default function Hero() {
         {/* Hero stage */}
         <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           
-          {/* Mobile Watermark: HospAI logo positioned in the background of the content with reduced opacity */}
-          <div className="lg:hidden absolute inset-0 flex items-center justify-center pointer-events-none -z-0 overflow-hidden select-none" aria-hidden="true">
+          {/* Mobile Watermark: HospAI logo distinctly visible in the background of the content */}
+          <div className="lg:hidden absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden select-none" aria-hidden="true">
             <img
               src={hospAiLogo}
               alt=""
-              className="w-[320px] sm:w-[420px] max-w-none opacity-[0.08] filter blur-[0.4px] transform scale-110 -translate-y-6"
+              className="w-[330px] sm:w-[440px] max-w-none opacity-[0.22] object-contain transform scale-105 -translate-y-4"
             />
           </div>
 
@@ -55,7 +55,7 @@ export default function Hero() {
           <div className="relative z-10 lg:col-span-7 text-left">
             <button
               onClick={() => scrollToId('#dashboard')}
-              className="animate-fade-in group inline-flex items-center gap-2 rounded-full border border-rose-200/80 bg-white/90 backdrop-blur pl-1.5 pr-3.5 py-1 text-[12px] sm:text-[13px] text-slate-600 shadow-sm hover:border-rose-300 hover:shadow-md transition-all duration-300 max-w-full"
+              className="animate-fade-in group inline-flex items-center gap-2 rounded-full border border-rose-200/80 bg-white/95 backdrop-blur pl-1.5 pr-3.5 py-1 text-[12px] sm:text-[13px] text-slate-600 shadow-sm hover:border-rose-300 hover:shadow-md transition-all duration-300 max-w-full"
             >
               <span className="relative shrink-0 flex items-center gap-1.5 rounded-full bg-[#e11d48] text-white text-[10.5px] sm:text-[11px] font-bold px-2.5 py-0.5 shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-white animate-ping-slow" />
