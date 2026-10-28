@@ -119,34 +119,36 @@ function SecureVisual() {
   );
 }
 
-const cards: { title: string; desc: string; visual: ReactNode; span: string; points?: string[] }[] = [
+const cards = [
   {
-    title: 'One longitudinal patient record',
-    desc: 'Registration, triage notes, orders, results, medications and invoices all attach to one MRN. No re-keying between departments, no reconciling two systems.',
-    points: ['Master patient index with duplicate detection', 'Allergies and alerts follow the patient everywhere'],
+    title: 'One continuous patient record',
+    desc: 'From triage to discharge and insurance claim, every entry lives in one longitudinal record. No re-keying data between departments.',
+    points: ['Live status sync across teams', 'No duplicate entries', 'Complete audit trail'],
     visual: <RecordVisual />,
-    span: 'lg:col-span-2',
+    span: 'md:col-span-2',
   },
   {
-    title: 'Real-time by default',
-    desc: 'Boards, beds and queues update instantly across tabs and departments, and keep working offline until the network returns.',
+    title: 'Live operations, zero blind spots',
+    desc: 'Beds, ED queues, OT schedules, and ICU transfers in real time. Everyone sees the same state of the hospital.',
+    points: ['Instant bed availability', 'Real-time nurse call alerts'],
     visual: <LiveVisual />,
     span: '',
   },
   {
-    title: 'Built around roles',
-    desc: 'Every role lands on its own workspace and sees what it needs, nothing more.',
+    title: 'Built for every hospital role',
+    desc: 'Doctors, nurses, lab techs, pharmacists, billing teams, and leadership each get tailored views designed for their speed.',
     visual: <RolesVisual />,
     span: '',
   },
   {
-    title: 'Clinical safety built in',
-    desc: 'Allergy and interaction checks at order entry, critical-value escalation and NEWS2 scoring.',
+    title: 'Clinical safety at every step',
+    desc: 'Drug-drug interaction checks, allergy alerts, critical lab escalation rules, and mandatory second-signatures for high-risk meds.',
+    points: ['NABH-compliant workflows', 'Automated adverse event logging'],
     visual: <SafetyVisual />,
     span: '',
   },
   {
-    title: 'Modular, not monolithic',
+    title: 'Modular yet deeply unified',
     desc: 'Start with ED and inpatient, then add modules when you are ready, all on the same data model.',
     visual: <ModularVisual />,
     span: '',
@@ -155,7 +157,7 @@ const cards: { title: string; desc: string; visual: ReactNode; span: string; poi
 
 export default function ProductIntro() {
   return (
-    <section id="product" className="py-20 sm:py-28 bg-white">
+    <section id="product" className="pt-4 sm:pt-12 lg:pt-20 pb-16 sm:pb-24 lg:pb-28 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -165,7 +167,7 @@ export default function ProductIntro() {
           />
         </Reveal>
 
-        <Reveal stagger className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Reveal stagger className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cards.map((c, i) => (
             <article
               key={c.title}
