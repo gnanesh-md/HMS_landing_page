@@ -29,7 +29,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 pb-10">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10 pb-12 border-b border-white/10">
           <div className="col-span-2">
-            <Logo dark imgClassName="h-20 sm:h-24 md:h-28 lg:h-32" />
+            <Logo dark />
             <p className="mt-4 text-[14px] leading-relaxed max-w-xs">
               The operating system for modern hospitals: clinical, operational and financial workflows on one connected platform, on web and mobile.
             </p>

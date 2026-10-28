@@ -32,7 +32,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ ['--lay' as string]: 1 }} className="relative pt-36 sm:pt-40 md:pt-44 pb-20 sm:pb-28 overflow-hidden bg-white">
+    <section ref={sectionRef} style={{ ['--lay' as string]: 1 }} className="relative pt-36 sm:pt-40 pb-20 sm:pb-28 overflow-hidden bg-white">
       {/* Light stage: grid + soft coral/purple glows */}
       <div className="absolute inset-0 bg-grid mask-fade-b pointer-events-none" style={{ transform: 'translateY(calc(var(--sy, 0) * 0.25px))' }} />
       <div className="hero-aurora absolute -top-40 left-[10%] h-[520px] w-[520px] rounded-full bg-brand-300/30 blur-[110px] pointer-events-none" />

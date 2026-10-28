@@ -17,44 +17,35 @@ const navLinks = [
 ];
 
 /** HospAI official transparent brand logo. */
-export function LogoMark({ size = 48, className = '' }: { size?: number; className?: string }) {
+/** HospAI official transparent brand logo. */
+export function LogoMark({ size = 42 }: { size?: number }) {
   return (
     <img
       src={hospAiLogo}
       alt="HospAI"
       width={size}
       height={size}
-      className={`object-contain shrink-0 select-none ${className}`}
+      className="object-contain shrink-0 select-none"
       style={{ width: size, height: size }}
     />
   );
 }
 
-export function Logo({
-  dark = false,
-  className = '',
-  imgClassName = '',
-  compact = false,
-}: {
-  dark?: boolean;
-  className?: string;
-  imgClassName?: string;
-  compact?: boolean;
-}) {
-  const sizeClasses = compact
-    ? 'h-10 sm:h-11 md:h-12'
-    : 'h-14 sm:h-16 md:h-18';
-
+export function Logo({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
   return (
-    <span className={`inline-flex items-center transition-all duration-300 ${dark ? 'bg-white rounded-2xl p-2.5 shadow-md' : ''} ${className}`}>
+    <span className={`inline-flex items-center ${className}`}>
       <img
         src={hospAiLogo}
         alt="HospAI"
-        className={`${sizeClasses} w-auto object-contain select-none transition-all duration-300 hover:scale-[1.02] ${dark ? 'rounded-xl h-16 sm:h-20 md:h-24' : ''} ${imgClassName}`}
+        className={`h-12 sm:h-14 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
+          dark ? 'brightness-125' : ''
+        }`}
       />
     </span>
   );
 }
+
+
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -124,24 +115,19 @@ export default function Navbar() {
 
         <div
           className={`transition-all duration-300 ${
-            solid ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_3px_rgba(15,23,42,0.04)]' : 'bg-transparent border-b border-transparent'
+            solid ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_0_rgba(15,23,42,0.02)]' : 'bg-transparent border-b border-transparent'
           }`}
           onMouseLeave={() => setMega(false)}
         >
-          <div
-            className={`mx-auto flex items-center justify-between transition-all duration-300 ease-in-out ${
-              scrolled
-                ? 'w-full max-w-7xl px-4 sm:px-8 h-16'
-                : 'w-full max-w-5xl lg:max-w-6xl px-4 sm:px-6 h-20 sm:h-22'
-            }`}
-          >
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 h-16 flex items-center justify-between">
             <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="HospAI home">
-              <Logo compact={scrolled} />
+              <Logo />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-0.5">
               <button
 
+                onMouseEnter={() => setMega(true)}
                 onClick={() => setMega((m) => !m)}
                 className={`flex items-center gap-1 px-3 h-9 rounded-md text-[14px] font-medium transition-colors ${mega ? 'text-slate-900 bg-slate-100' : 'text-slate-600 hover:text-slate-900'}`}
                 aria-expanded={mega}
@@ -250,8 +236,8 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[60] lg:hidden">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" onClick={() => setMenuOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[86%] max-w-sm bg-white shadow-2xl flex flex-col animate-slide-in-right">
-            <div className="flex items-center justify-between px-5 h-24 border-b border-slate-100">
-              <Logo compact={scrolled} />
+            <div className="flex items-center justify-between px-5 h-16 border-b border-slate-100">
+              <Logo />
               <button onClick={() => setMenuOpen(false)} className="p-2 -mr-2 text-slate-600" aria-label="Close menu"><XIcon size={22} /></button>
             </div>
             <nav className="flex-1 overflow-y-auto px-3 py-4">
