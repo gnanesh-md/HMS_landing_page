@@ -32,15 +32,15 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ ['--lay' as string]: 1 }} className="relative pt-20 sm:pt-24 lg:pt-28 pb-4 sm:pb-8 lg:pb-16 overflow-hidden bg-white">
+    <section ref={sectionRef} style={{ ['--lay' as string]: 1 }} className="relative pt-18 sm:pt-20 lg:pt-24 pb-4 sm:pb-8 lg:pb-16 overflow-hidden bg-white">
       {/* Light stage: grid + soft coral/purple glows */}
       <div className="absolute inset-0 bg-grid mask-fade-b pointer-events-none" style={{ transform: 'translateY(calc(var(--sy, 0) * 0.25px))' }} />
-      <div className="hero-aurora absolute -top-40 left-[10%] h-[520px] w-[520px] rounded-full bg-rose-200/25 blur-[120px] pointer-events-none" />
-      <div className="hero-aurora absolute -top-24 right-[8%] h-[500px] w-[560px] rounded-full bg-purple-200/20 blur-[130px] pointer-events-none" style={{ animationDelay: '-6s' }} />
+      <div className="hero-aurora absolute -top-40 left-[10%] h-[540px] w-[540px] rounded-full bg-rose-200/25 blur-[120px] pointer-events-none" />
+      <div className="hero-aurora absolute -top-24 right-[8%] h-[520px] w-[580px] rounded-full bg-purple-200/20 blur-[130px] pointer-events-none" style={{ animationDelay: '-6s' }} />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Hero stage: compact vertical rhythm so the command dashboard peeks onto the main screen */}
-        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        {/* Hero stage: enhanced content height with balanced vertical placement */}
+        <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
           {/* Mobile Watermark: HospAI logo distinctly visible in the background */}
           <div className="lg:hidden absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden select-none" aria-hidden="true">
@@ -52,12 +52,12 @@ export default function Hero() {
           </div>
 
           {/* Left Column: Badge, Headline, Paragraph, CTAs & Proof */}
-          <div className="relative z-10 lg:col-span-7 text-left py-1 sm:py-3">
+          <div className="relative z-10 lg:col-span-7 text-left py-2 sm:py-4">
             <button
               onClick={() => scrollToId('#dashboard')}
-              className="animate-fade-in group inline-flex items-center gap-2 rounded-full border border-rose-200/80 bg-white/95 backdrop-blur pl-2 pr-3.5 py-1 text-[12px] sm:text-[13px] text-slate-600 shadow-sm hover:border-rose-300 hover:shadow-md transition-all duration-300 max-w-full"
+              className="animate-fade-in group inline-flex items-center gap-2 rounded-full border border-rose-200/80 bg-white/95 backdrop-blur pl-2 pr-4 py-1.5 text-[12.5px] sm:text-[13.5px] text-slate-600 shadow-sm hover:border-rose-300 hover:shadow-md transition-all duration-300 max-w-full"
             >
-              <span className="relative shrink-0 flex items-center gap-1.5 rounded-full bg-[#e11d48] text-white text-[10.5px] sm:text-[11px] font-bold px-2.5 py-0.5 shadow-sm">
+              <span className="relative shrink-0 flex items-center gap-1.5 rounded-full bg-[#e11d48] text-white text-[11px] sm:text-[11.5px] font-bold px-3 py-0.5 shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-white animate-ping-slow" />
                 + HospAI
               </span>
@@ -67,7 +67,7 @@ export default function Hero() {
               <ArrowRightIcon size={13} className="shrink-0 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
             </button>
 
-            <h1 className="mt-4 sm:mt-5 font-display text-[36px] sm:text-[48px] lg:text-[54px] xl:text-[60px] font-extrabold text-slate-900 leading-[1.08] tracking-[-0.035em]">
+            <h1 className="mt-5 sm:mt-6 font-display text-[40px] sm:text-[54px] lg:text-[62px] xl:text-[68px] font-extrabold text-slate-900 leading-[1.08] tracking-[-0.035em]">
               {['The', 'command', 'center'].map((w, i) => (
                 <span key={w} className="word-rise" style={{ animationDelay: `${0.08 + i * 0.08}s` }}>{w}&nbsp;</span>
               ))}
@@ -82,29 +82,29 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="animate-fade-in-up anim-delay-500 mt-3.5 sm:mt-4 text-[15px] sm:text-[17px] text-slate-600 leading-relaxed max-w-xl">
+            <p className="animate-fade-in-up anim-delay-500 mt-5 sm:mt-6 text-[16px] sm:text-[18.5px] text-slate-600 leading-relaxed max-w-xl">
               Census, beds, ED, ICU, OT, lab, pharmacy, billing and insurance on one live screen, with AI that writes notes,
               splits prescriptions and reads documents for your team.
             </p>
 
-            {/* CTAs */}
-            <div className="animate-fade-in-up anim-delay-600 mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            {/* CTAs with generous height and presence */}
+            <div className="animate-fade-in-up anim-delay-600 mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
               <button
                 onClick={() => navigate('/book-demo')}
-                className="btn-shine group inline-flex items-center justify-center gap-2 h-[46px] sm:h-[48px] px-6 rounded-xl bg-[#e11d48] hover:bg-[#be123c] text-white text-[15px] font-semibold shadow-lg shadow-rose-600/25 hover:shadow-rose-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
+                className="btn-shine group inline-flex items-center justify-center gap-2 h-[50px] sm:h-[54px] px-7 sm:px-8 rounded-xl bg-[#e11d48] hover:bg-[#be123c] text-white text-[15px] sm:text-[16px] font-semibold shadow-lg shadow-rose-600/25 hover:shadow-rose-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
               >
                 Book a live demo <ArrowRightIcon size={16} className="transition-transform group-hover:translate-x-1" />
               </button>
               <button
                 onClick={() => scrollToId('#dashboard')}
-                className="group inline-flex items-center justify-center gap-2 h-[46px] sm:h-[48px] px-6 rounded-xl border border-slate-200/90 bg-white text-slate-800 text-[15px] font-semibold hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 active:translate-y-0 shadow-sm transition-all duration-200"
+                className="group inline-flex items-center justify-center gap-2 h-[50px] sm:h-[54px] px-7 sm:px-8 rounded-xl border border-slate-200/90 bg-white text-slate-800 text-[15px] sm:text-[16px] font-semibold hover:border-slate-300 hover:bg-slate-50 hover:-translate-y-0.5 active:translate-y-0 shadow-sm transition-all duration-200"
               >
-                <PlayIcon size={13} className="text-[#e11d48] fill-[#e11d48] transition-transform group-hover:scale-110" /> Explore the dashboard
+                <PlayIcon size={14} className="text-[#e11d48] fill-[#e11d48] transition-transform group-hover:scale-110" /> Explore the dashboard
               </button>
             </div>
 
             {/* Mobile enhancement: Live proof badges strip */}
-            <div className="lg:hidden mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <div className="lg:hidden mt-6 pt-5 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-200/70 text-[11.5px] font-semibold text-rose-700 whitespace-nowrap shadow-xs">
                 <span className="h-2 w-2 rounded-full bg-rose-500 animate-ping-slow" />
                 Critical Lab · 42s Alert
@@ -120,7 +120,7 @@ export default function Hero() {
             </div>
 
             {/* Trust badges */}
-            <div className="mt-5 hidden sm:flex items-center gap-5 text-[12.5px] text-slate-500">
+            <div className="mt-6 hidden sm:flex items-center gap-6 text-[13px] text-slate-500">
               <span className="flex items-center gap-1.5"><CheckIcon size={14} className="text-emerald-500" /> ABDM M1, M2, M3</span>
               <span className="flex items-center gap-1.5"><CheckIcon size={14} className="text-emerald-500" /> 10 Indian Languages</span>
               <span className="flex items-center gap-1.5"><CheckIcon size={14} className="text-emerald-500" /> NABH & HIPAA Ready</span>
@@ -128,23 +128,23 @@ export default function Hero() {
           </div>
 
           {/* Desktop Right Column: HospAI Logo with smooth floating animation & subtle breathing aura */}
-          <div className="hidden lg:flex lg:col-span-5 items-center justify-center relative my-2">
+          <div className="hidden lg:flex lg:col-span-5 items-center justify-center relative my-4">
             {/* Ambient breathing aura behind logo */}
-            <div className="absolute w-[300px] h-[300px] lg:w-[380px] lg:h-[380px] rounded-full bg-gradient-to-tr from-rose-200/35 via-purple-200/25 to-sky-200/30 blur-3xl pointer-events-none animate-pulse-glow" />
+            <div className="absolute w-[320px] h-[320px] lg:w-[400px] lg:h-[400px] rounded-full bg-gradient-to-tr from-rose-200/35 via-purple-200/25 to-sky-200/30 blur-3xl pointer-events-none animate-pulse-glow" />
 
             {/* Floating Logo showcase */}
-            <div className="relative z-10 p-4 flex items-center justify-center animate-float-gentle">
+            <div className="relative z-10 p-5 flex items-center justify-center animate-float-gentle">
               <img
                 src={hospAiLogo}
                 alt="HospAI - AI-Driven Healthcare Optimization"
-                className="w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] object-contain select-none drop-shadow-[0_16px_30px_rgba(15,23,42,0.08)] transition-all duration-500 hover:scale-[1.03] hover:drop-shadow-[0_20px_40px_rgba(225,29,72,0.14)]"
+                className="w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[450px] object-contain select-none drop-shadow-[0_18px_32px_rgba(15,23,42,0.08)] transition-all duration-500 hover:scale-[1.03] hover:drop-shadow-[0_22px_42px_rgba(225,29,72,0.14)]"
               />
             </div>
           </div>
         </div>
 
         {/* Product, elevated — peeks onto the main screen above the fold */}
-        <div className="relative mt-7 sm:mt-10 lg:mt-12 dash-rise">
+        <div className="relative mt-6 sm:mt-8 lg:mt-10 dash-rise">
           <div className="absolute -inset-x-6 -top-10 bottom-10 rounded-[48px] bg-gradient-to-b from-brand-500/15 via-accent-500/10 to-transparent blur-3xl pointer-events-none" />
 
           <div id="dashboard" className="hero-tilt relative scroll-mt-28">
