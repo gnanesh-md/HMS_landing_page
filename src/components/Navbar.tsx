@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import hospAiLogo from '../assets/logo.png';
 import { ArrowRightIcon, ChevronDownIcon, MenuIcon, XIcon } from './icons';
 import { moduleGroups, showDashboard } from './moduleData';
 import { scrollToId } from './ui';
@@ -19,7 +20,7 @@ const navLinks = [
 export function LogoMark({ size = 48, className = '' }: { size?: number; className?: string }) {
   return (
     <img
-      src="/hosp ai logo without bg.png"
+      src={hospAiLogo}
       alt="HospAI"
       width={size}
       height={size}
@@ -41,7 +42,7 @@ export function Logo({
   return (
     <span className={`inline-flex items-center ${className}`}>
       <img
-        src="/hosp ai logo without bg.png"
+        src={hospAiLogo}
         alt="HospAI"
         className={`h-14 sm:h-18 md:h-20 w-auto object-contain select-none transition-transform hover:scale-[1.02] ${
           dark ? 'brightness-125 drop-shadow-[0_2px_8px_rgba(255,255,255,0.08)]' : ''
