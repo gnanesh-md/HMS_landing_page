@@ -17,17 +17,17 @@ const items = [
 export default function ProductStrip() {
   const row = [...items, ...items];
   return (
-    <section className="border-y border-slate-200/70 bg-slate-50/70 py-9">
+    <section className="border-y border-slate-200/70 bg-slate-50/70 py-5 sm:py-9">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="text-center text-[12px] font-semibold uppercase tracking-[0.16em] text-slate-500 mb-6">
+        <p className="text-center text-[11.5px] sm:text-[12px] font-semibold uppercase tracking-[0.16em] text-slate-500 mb-4 sm:mb-6">
           Built for the way Indian hospitals work
         </p>
         <div className="relative overflow-hidden mask-fade-x">
           <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
             {row.map(([name, kind], i) => (
-              <div key={i} className="flex items-center gap-2.5 px-7 border-r border-slate-200 last:border-0" aria-hidden={i >= items.length}>
-                <span className="font-display text-[17px] font-bold text-slate-700 whitespace-nowrap">{name}</span>
-                <span className="text-[12px] text-slate-400 whitespace-nowrap">{kind}</span>
+              <div key={i} className="flex items-center gap-2.5 px-6 sm:px-7 border-r border-slate-200 last:border-0" aria-hidden={i >= items.length}>
+                <span className="font-display text-[15.5px] sm:text-[17px] font-bold text-slate-700 whitespace-nowrap">{name}</span>
+                <span className="text-[11.5px] sm:text-[12px] text-slate-400 whitespace-nowrap">{kind}</span>
               </div>
             ))}
           </div>
